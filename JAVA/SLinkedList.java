@@ -1,5 +1,3 @@
-package dataStructures;
-
 public class SLinkedList<T> {
 	private Node<T> headPointer, tailPointer;
 	private int size;
@@ -15,7 +13,7 @@ public class SLinkedList<T> {
 	public SLinkedList(T data){
 		headPointer = tailPointer = new Node<T>(data);
 	}
-	
+
 	public void pushFront(T data){
 		Node<T> newNode = new Node<T>(data);
 		if(headPointer == null) {
@@ -28,21 +26,21 @@ public class SLinkedList<T> {
 		}
 		size++;
 	}
-	
+
 	public T topFront() {
 		return headPointer.data;
 	}
-	
+
 	public void popFront() {
 		if(headPointer == null) {
-			
+
 		}
 		else {
 			headPointer = headPointer.next;
 			size--;
 		}
 	}
-	
+
 	//append(data)
 	public void pushBack(T data) {
 		Node<T> newNode = new Node<T>(data);
@@ -57,14 +55,14 @@ public class SLinkedList<T> {
 		}
 		size++;
 	}
-	
+
 	public T topBack() {
 		return tailPointer.data;
 	}
-	
+
 	public void popBack() {
 		if(headPointer == null) {
-			
+
 		}
 		else {
 			Node<T> node = headPointer;
@@ -76,7 +74,7 @@ public class SLinkedList<T> {
 			size--;
 		}
 	}
-	
+
 	public void printList() {
 		Node<T> node = headPointer;
 		while(node!=null){
@@ -85,8 +83,8 @@ public class SLinkedList<T> {
 		}
 		System.out.print("\n");
 	}
-	
-	
+
+
 	public int getSize(){
 		return size;
 	}
@@ -112,7 +110,7 @@ public class SLinkedList<T> {
 		test.popBack();
 		test.printList();
 		System.out.println("Done");
-		
+
 	}
-	
+
 }
