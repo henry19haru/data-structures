@@ -75,7 +75,6 @@ public class DLinkedList<T> {
 		test.printList();
 		test.pushBack(8);
 		test.printList();
-		test.rotate();
 		test.printList();
 		test.popFront();
 		test.printList();

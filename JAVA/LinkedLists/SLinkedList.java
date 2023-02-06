@@ -1,4 +1,4 @@
-public class SLinkedList<T> {
+public class SLinkedList<T> implements Cloneable {
 	private Node<T> headPointer, tailPointer;
 	private int size;
 	private class Node<T>{
@@ -6,7 +6,6 @@ public class SLinkedList<T> {
 		Node<T> next;
 		public Node(T data) {
 			this.data = data;
-			size++;
 		}
 	}
 
@@ -84,33 +83,69 @@ public class SLinkedList<T> {
 		System.out.print("\n");
 	}
 
+	public boolean equals(Object obj){
+			if(obj == null){
+				return false;
+			}
+			if(getClass() != obj.getClass()){
+				return false;
+			}
+			SLinkedList list = (SLinkedList) obj;
+			if(size != list.size) {
+				return false;
+			}
+			Node nodeA = headPointer;
+			Node nodeB = list.headPointer;
+			while(nodeA != null){
+				if(nodeA.data != nodeB.data ){
+					return false;
+				}
+				nodeA = nodeA.next;
+				nodeB = nodeB.next;
+			}
+			return true;
+	}
 
 	public int getSize(){
 		return size;
 	}
+
+	public SLinkedList<T>clone() throws CloneNotSupportedException{
+		SLinkedList<T> other = (SLinkedList<T>)super.clone();
+		if(size>0){
+			other.headPointer = new Node<T>(headPointer.data);
+			Node<T> nodeA = headPointer;
+			Node<T> nodeB = other.headPointer;
+			while(nodeA.next!=null){
+				Node<T> newNode = new Node<T>(nodeA.next.data);
+				nodeB.next = newNode;
+				nodeA = nodeA.next;
+				nodeB = nodeB.next;
+			}
+		}
+		return other;
+	}
+
 	public static void main(String args[]){
 		SLinkedList<Integer> test = new SLinkedList<Integer>(6);
-		test.printList();
-		System.out.println(test.topFront());
-		System.out.println(test.topBack());
-		System.out.println();
-		test.pushFront(7);
-		test.printList();
-		System.out.println(test.topFront());
-		System.out.println(test.topBack());
-		System.out.println();
+		test.pushBack(7);
 		test.pushBack(8);
-		test.printList();
-		System.out.println(test.topFront());
-		System.out.println(test.topBack());
-		System.out.println();
-		test.popFront();
-		test.printList();
-		System.out.println();
-		test.popBack();
-		test.printList();
-		System.out.println("Done");
 
+		SLinkedList<Integer> test2 = new SLinkedList<Integer>(6);
+		test2.pushBack(7);
+		test2.pushBack(8);
+
+		System.out.println(test.equals(test2));
+
+		try{
+			SLinkedList<Integer> cl = test.clone();
+			test.printList();
+			System.out.println(cl.equals(test));
+
+		}
+		catch(Exception e){
+			System.out.println("ERROR");
+		}
 	}
 
 }
