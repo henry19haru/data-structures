@@ -12,6 +12,8 @@ public class SLinkedList<T> implements Cloneable {
 	public SLinkedList(T data){
 		headPointer = tailPointer = new Node<T>(data);
 	}
+	public SLinkedList(){
+	}
 
 	public void pushFront(T data){
 		Node<T> newNode = new Node<T>(data);
@@ -30,13 +32,15 @@ public class SLinkedList<T> implements Cloneable {
 		return headPointer.data;
 	}
 
-	public void popFront() {
+	public T popFront() {
 		if(headPointer == null) {
-
+			return null;
 		}
 		else {
+			T result = headPointer.data;
 			headPointer = headPointer.next;
 			size--;
+			return result;
 		}
 	}
 
@@ -59,18 +63,25 @@ public class SLinkedList<T> implements Cloneable {
 		return tailPointer.data;
 	}
 
-	public void popBack() {
+	public T popBack() {
 		if(headPointer == null) {
-
+			return null;
 		}
 		else {
+			T result = tailPointer.data;
 			Node<T> node = headPointer;
+			if(node==tailPointer){
+				headPointer = tailPointer = null;
+				size--;
+				return result;
+			}
 			while(node.next != tailPointer) {
 				node = node.next;
 			}
 			node.next = null;
 			tailPointer = node;
 			size--;
+			return result;
 		}
 	}
 
